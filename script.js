@@ -53,7 +53,7 @@ function setup() {
   renderInitialDisplay();
   document.getElementById("resize").addEventListener("click", (e) => {
     if(Number(document.getElementById("wsize").value) * Number(document.getElementById("hsize").value) > 400) {
-      document.getElementById("output").innerHTML = "Height too big"
+      document.getElementById("output").innerHTML = "Maximum size is 400px. (Height times width must equal less than 401px."
       return
     }
     width = Number(document.getElementById("wsize").value);
