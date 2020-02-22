@@ -42,7 +42,7 @@ function createExpression(index, wide, tall) {
     } else {}
   }
 
-	baseString = "x' = lerp((index%" + wide + ")/" + wide + "," + (width*2) + "," + (height * 6) +");<br>y' = -5(floor(index/" + wide + "))+" + (parseInt(tall) * 2).toString() + ";<br><br>h = lerp(fraction,0,360);<br>s = 1;<br><br>v = if(" + outputp + ",1,0);"
+	baseString = "x' = lerp((index%" + wide + ")/" + wide + ",-" + (width*2) + "," + (height * 2) +");<br>y' = -5(floor(index/" + wide + "))+" + (parseInt(tall) * 2).toString() + ";<br><br>h = lerp(fraction,0,360);<br>s = 1;<br><br>v = if(" + outputp + ",1,0);"
   if(spin) {
    baseString = baseString + "<br>xf = x'<br>yf = y'<br><br>xr = projectionTime;<br>yr = projectionTime;<br>zr = projectionTime;<br><br>xz = xf*cos(zr)-yf*sin(zr);<br>yz = xf*sin(zr)+yf*cos(zr);<br><br>x' = xz*cos(yr)+sin(yr)*yz*sin(xr);<br>y' = yz*cos(xr);<br>"
   }
