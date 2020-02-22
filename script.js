@@ -52,6 +52,10 @@ function createExpression(index, wide, tall) {
 function setup() {
   renderInitialDisplay();
   document.getElementById("resize").addEventListener("click", (e) => {
+    if(Number(document.getElementById("wsize").value) * Number(document.getElementById("hsize").value) > 400) {
+      document.getElementById("output").innerHTML = "Height too big"
+      return
+    }
     width = Number(document.getElementById("wsize").value);
     height = Number(document.getElementById("hsize").value);
     renderInitialDisplay();
