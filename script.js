@@ -34,6 +34,44 @@ function renderInitialDisplay() {
 }
 
 function createExpression(index, wide, tall) {
+  let outputx = "";
+  let outputy = "";
+  let outputv = "";
+  //keep track of used indexes
+  let indexWorkaround = [];
+
+  for(let i=0; i<index.length; i++) {
+    if(index[i] == 1) {
+      workingIndex = i%400
+      if(indexWorkaround.includes(i%400)) {
+        let loopcount = 0
+        while(indexWorkaround.includes(i%400)) {
+          if(loopcount == 400) {
+            return "Error: Reached maximum loop count. Please reduce your pixel usage. (Max activated pixels: 400)"
+          }
+          indexWorkaround++
+          loopcount++
+        }
+      }
+      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
+      outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/tall)+0.5)-(parseInt(wide)/2)).toString()+","
+      outputv = outputv + "index == "+workingIndex.toString()+" || "
+    }
+  }
+
+  outputx = outputx + "0"
+  outputy = outputy + "0"
+  outputv = outputv.substr(0,outputv.length-4) + ",1,0);";
+
+  for(let i=0;i<index.length;i++) {
+    outputx = outputx + ")"
+    outputy = outputy + ")"
+  }
+
+  return "x' = (" + outputx + ");<br><br>y' = (-" + outputy + ");<br><br>h = 0;<br>s = 1;<br>v = if(" + outputv
+}
+
+function createExpressionOld(index, wide, tall) {
   let outputp = "";
   
   for (let i = 0; i < index.length; i++) {
@@ -52,10 +90,6 @@ function createExpression(index, wide, tall) {
 function setup() {
   renderInitialDisplay();
   document.getElementById("resize").addEventListener("click", (e) => {
-    if(Number(document.getElementById("wsize").value) * Number(document.getElementById("hsize").value) > 400) {
-      document.getElementById("output").innerHTML = "Maximum size is 400px. (Height times width must equal less than 401px."
-      return
-    }
     width = Number(document.getElementById("wsize").value);
     height = Number(document.getElementById("hsize").value);
     renderInitialDisplay();
