@@ -39,6 +39,9 @@ function createExpression(index, wide, tall) {
   let outputv = "";
   //keep track of used indexes
   let indexWorkaround = [];
+  //keep track of how many parentheses we should actually have at the end
+  //this doesn't really matter, it just prevents it from looking stupid
+  let activeCount = 0;
 
   for(let i=0; i<index.length; i++) {
     if(index[i] == 1) {
@@ -53,10 +56,11 @@ function createExpression(index, wide, tall) {
           loopcount++
         }
       }
-      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
-      outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/tall)+0.5)-(parseInt(wide)/2)).toString()+","
+      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(height)/2)).toString()+","
+      outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/wide)+0.5)-(parseInt(wide)/2)).toString()+","
       outputv = outputv + "index == "+workingIndex.toString()+" || "
       indexWorkaround.push(workingIndex)
+      activeCount++
     }
   }
 
@@ -64,7 +68,7 @@ function createExpression(index, wide, tall) {
   outputy = outputy + "0"
   outputv = outputv.substr(0,outputv.length-4) + ",1,0);";
 
-  for(let i=0;i<index.length;i++) {
+  for(let i=0;i<activeCount;i++) {
     outputx = outputx + ")"
     outputy = outputy + ")"
   }
@@ -75,22 +79,6 @@ function createExpression(index, wide, tall) {
     baseString = baseString + "<br>xf = x'<br>yf = y'<br><br>xr = projectionTime;<br>yr = projectionTime;<br>zr = projectionTime;<br><br>xz = xf*cos(zr)-yf*sin(zr);<br>yz = xf*sin(zr)+yf*cos(zr);<br><br>x' = xz*cos(yr)+sin(yr)*yz*sin(xr);<br>y' = yz*cos(xr);<br>"
   }
   return baseString
-}
-
-function createExpressionOld(index, wide, tall) {
-  let outputp = "";
-  
-  for (let i = 0; i < index.length; i++) {
-    if (index[i] == 1) {
-      outputp = outputp + "index == " + i + " || "
-    } else {}
-  }
-
-	baseString = "x' = lerp((index%" + wide + ")/" + wide + ",-" + (width*2) + "," + (height * 2) +");<br>y' = -5(floor(index/" + wide + "))+" + (parseInt(tall) * 2).toString() + ";<br><br>h = lerp(fraction,0,360);<br>s = 1;<br><br>v = if(" + outputp + ",1,0);"
-  if(spin) {
-   baseString = baseString + "<br>xf = x'<br>yf = y'<br><br>xr = projectionTime;<br>yr = projectionTime;<br>zr = projectionTime;<br><br>xz = xf*cos(zr)-yf*sin(zr);<br>yz = xf*sin(zr)+yf*cos(zr);<br><br>x' = xz*cos(yr)+sin(yr)*yz*sin(xr);<br>y' = yz*cos(xr);<br>"
-  }
-  return (baseString)
 }
 
 function setup() {
