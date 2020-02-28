@@ -49,13 +49,14 @@ function createExpression(index, wide, tall) {
           if(loopcount == 400) {
             return "Error: Reached maximum loop count. Please reduce your pixel usage. (Max activated pixels: 400)"
           }
-          indexWorkaround++
+          workingIndex++
           loopcount++
         }
       }
       outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
       outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/tall)+0.5)-(parseInt(wide)/2)).toString()+","
       outputv = outputv + "index == "+workingIndex.toString()+" || "
+      indexWorkaround.push(workingIndex)
     }
   }
 
