@@ -45,7 +45,7 @@ function createExpression(index, wide, tall) {
       workingIndex = i%400
       if(indexWorkaround.includes(i%400)) {
         let loopcount = 0
-        while(indexWorkaround.includes(i%400)) {
+        while(indexWorkaround.includes(workingIndex%400)) {
           if(loopcount == 400) {
             return "Error: Reached maximum loop count. Please reduce your pixel usage. (Max activated pixels: 400)"
           }
