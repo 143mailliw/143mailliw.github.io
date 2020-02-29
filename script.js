@@ -2,6 +2,7 @@ let width = 50;
 let height = 5;
 let spin = false;
 let bounce = false;
+let expand = false;
 let resizeConfirm = false;
 let clearConfirm = false;
 
@@ -86,6 +87,10 @@ function createExpression(index, wide, tall) {
     baseString = baseString + "<br>y' = y' - 10 + abs(15cos(projectionTime*3))"
   }
 
+  if(expand) {
+    baseString = baseString + "<br>y' = y' * abs(cos(projectionTime))*2)<br>x' = x' * abs(cos(projectionTime))*2)"
+  }
+
   return baseString
 }
 
@@ -148,6 +153,15 @@ function setup() {
     } else {
       e.target.className = "checkbox ticked"
       bounce = true;
+    }
+  })
+  document.getElementById("enable-expand").addEventListener("click", (e) => {
+    if (e.target.className.includes("on")) {
+      e.target.className = "checkbox off"
+      expand = false;
+    } else {
+      e.target.className = "checkbox ticked"
+      expand = true;
     }
   })
   document.getElementById("copy").addEventListener("click", (e) => {
