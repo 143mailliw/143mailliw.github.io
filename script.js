@@ -100,12 +100,12 @@ function setup() {
     }
     document.getElementById("output").innerHTML = createExpression(value, width, height);
   })
-  document.getElementById("enable").addEventListener("click", (e) => {
+  document.getElementById("enable-spin").addEventListener("click", (e) => {
         if (e.target.className.includes("on")) {
-          e.target.className = "dot off"
+          e.target.className = "checkbox off"
           spin = false;
         } else {
-          e.target.className = "dot on"
+          e.target.className = "checkbox ticked"
           spin = true;
         }
       })

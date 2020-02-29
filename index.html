@@ -5,16 +5,37 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body onload="setup()">
-    <h1>Laser Projector Image Creator</h1>
-    <div>Created by william341 (website), Chrnan6710 (expressions)</div>
-    <div id="display" class="display"></div>
-    <div class="button" id="clear">Clear</div>
-    <div class="button" id="export">Export</div>
-    <input type="text" id="wsize" placeholder="Width">
-    <input type="text" id="hsize" placeholder="Height">
-    <div class="button" id="resize">Change Size</div>
-    <div class="code" id="output">Click Export to create expression.</div>
-    <div class="dot off" id="enable"></div>
-    <span>Enable/Disable 3D Spin</span>
+    <div class="header">
+      <h1>Laser Projector Image Creator</h1>
+      <div>Version 2.2</div>
+    </div>
+    <div class="effects">
+      <span class="effects-header">effects</span>
+      <div>
+        <div class="checkbox off" id="enable-spin"></div>
+        <span>3D Spin</span>
+      </div>
+    </div>
+    <div class="main">
+      <div id="display" class="display"></div>
+      <div class="button-group">
+        <div class="button" id="clear">Clear</div>
+        <div class="button" id="export">Export</div>
+        <input type="text" id="wsize" placeholder="Width">
+        <input type="text" id="hsize" placeholder="Height">
+        <div class="button" id="resize">Change Size</div>
+      </div>
+      <div class="output">
+        <div class="output-header">
+          <div class="output-header-text">output</div>
+          <div class="output-copy">click to copy</div>
+        </div>
+        <div class="output-body" id="output">Waiting for export...</div>
+      </div>
+    </div>
+    <div class="copyright">
+      Licensed under the Apache License 2.0.<br>
+      © Copyright william341, Chrnan6710. Some rights reserved.
+    </div>
   </body>
 </html>
