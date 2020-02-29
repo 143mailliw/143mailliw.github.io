@@ -138,7 +138,7 @@ function setup() {
     document.getElementById("output").innerHTML = createExpression(value, width, height);
   })
   document.getElementById("enable-spin").addEventListener("click", (e) => {
-    if (e.target.className.includes("on")) {
+    if (e.target.className.includes("ticked")) {
       e.target.className = "checkbox off"
       spin = false;
     } else {
@@ -147,7 +147,7 @@ function setup() {
     }
   })
   document.getElementById("enable-bounce").addEventListener("click", (e) => {
-    if (e.target.className.includes("on")) {
+    if (e.target.className.includes("ticked")) {
       e.target.className = "checkbox off"
       bounce = false;
     } else {
@@ -156,7 +156,7 @@ function setup() {
     }
   })
   document.getElementById("enable-expand").addEventListener("click", (e) => {
-    if (e.target.className.includes("on")) {
+    if (e.target.className.includes("ticked")) {
       e.target.className = "checkbox off"
       expand = false;
     } else {
