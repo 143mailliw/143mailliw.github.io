@@ -62,13 +62,21 @@
   font-weight: bold;
 }
 
+.output-copy {
+  cursor: pointer;
+}
+
 .output-body {
   font-family: 'Courier New', Courier, monospace;
   overflow: auto;
+  word-wrap: break-word;
   max-height: 10rem;
   scrollbar-color: #333333 #2c2c2c;
   scrollbar-width: thin;
   margin-top: 0.25rem;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  max-width: 47.9rem;
 }
 
 ::-webkit-scrollbar {

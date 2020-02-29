@@ -1,6 +1,9 @@
 let width = 50;
 let height = 5;
 let spin = false;
+let bounce = false;
+let resizeConfirm = false;
+let clearConfirm = false;
 
 function renderInitialDisplay() {
   let display = document.getElementById("display");
@@ -78,17 +81,46 @@ function createExpression(index, wide, tall) {
   if(spin) {
     baseString = baseString + "<br>xf = x'<br>yf = y'<br><br>xr = projectionTime;<br>yr = projectionTime;<br>zr = projectionTime;<br><br>xz = xf*cos(zr)-yf*sin(zr);<br>yz = xf*sin(zr)+yf*cos(zr);<br><br>x' = xz*cos(yr)+sin(yr)*yz*sin(xr);<br>y' = yz*cos(xr);<br>"
   }
+
+  if(bounce) {
+    baseString = baseString + "<br>y' = y' - 10 + abs(15cos(projectionTime*3))"
+  }
+
   return baseString
 }
 
 function setup() {
   renderInitialDisplay();
   document.getElementById("resize").addEventListener("click", (e) => {
-    width = Number(document.getElementById("wsize").value);
-    height = Number(document.getElementById("hsize").value);
-    renderInitialDisplay();
+    if(resizeConfirm) {
+      width = Number(document.getElementById("wsize").value);
+      height = Number(document.getElementById("hsize").value);
+      renderInitialDisplay();
+      resizeConfirm = false;
+      document.getElementById("resize").innerText="Resize"
+    } else {
+      resizeConfirm = true;
+      document.getElementById("resize").innerText="Are you sure?"
+      setTimeout(() => {
+        resizeConfirm = false;
+        document.getElementById("resize").innerText="Resize"
+      }, 2500)
+    }
   })
-  document.getElementById("clear").addEventListener("click", renderInitialDisplay)
+  document.getElementById("clear").addEventListener("click", () => {
+    if(clearConfirm) {
+      renderInitialDisplay()
+      clearConfirm = false;
+      document.getElementById("clear").innerText="Clear"
+    } else {
+      clearConfirm = true;
+      document.getElementById("clear").innerText="Are you sure?"
+      setTimeout(() => {
+        clearConfirm = false;
+        document.getElementById("clear").innerText="Clear"
+      }, 2500)
+    }
+  })
   document.getElementById("export").addEventListener("click", () => {
     let value = ""
     for (i = 0; i < width * height; i++) {
@@ -107,6 +139,15 @@ function setup() {
     } else {
       e.target.className = "checkbox ticked"
       spin = true;
+    }
+  })
+  document.getElementById("enable-bounce").addEventListener("click", (e) => {
+    if (e.target.className.includes("on")) {
+      e.target.className = "checkbox off"
+      bounce = false;
+    } else {
+      e.target.className = "checkbox ticked"
+      bounce = true;
     }
   })
   document.getElementById("copy").addEventListener("click", (e) => {
