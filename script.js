@@ -52,8 +52,7 @@ function createExpression(index, wide, tall) {
       }
       outputx = outputx + "if(index == "+activeCount.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
       outputy = outputy + "if(index == "+activeCount.toString()+","+((Math.floor(i/wide)+0.5)-(parseInt(wide)/2)).toString()+","
-      outputv = outputv + "index == "+workingIndex.toString()+" || "
-      indexWorkaround.push(workingIndex)
+      outputv = outputv + "index == "+activeCount.toString()+" || "
       activeCount++
     }
   }
