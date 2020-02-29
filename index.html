@@ -2,6 +2,7 @@
   <head>
     <title>Tower Unite Expression Creator</title>
     <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript" src="./copyToClipboard-min.js"></script>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body onload="setup()">
@@ -13,7 +14,7 @@
       <span class="effects-header">effects</span>
       <div>
         <div class="checkbox off" id="enable-spin"></div>
-        <span>3D Spin</span>
+        <span>3D Rotation</span>
       </div>
     </div>
     <div class="main">
@@ -28,7 +29,7 @@
       <div class="output">
         <div class="output-header">
           <div class="output-header-text">output</div>
-          <div class="output-copy">click to copy</div>
+          <div class="output-copy" id="copy">click to copy</div>
         </div>
         <div class="output-body" id="output">Waiting for export...</div>
       </div>

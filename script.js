@@ -56,7 +56,7 @@ function createExpression(index, wide, tall) {
           loopcount++
         }
       }
-      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(height)/2)).toString()+","
+      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
       outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/wide)+0.5)-(parseInt(wide)/2)).toString()+","
       outputv = outputv + "index == "+workingIndex.toString()+" || "
       indexWorkaround.push(workingIndex)
@@ -101,14 +101,17 @@ function setup() {
     document.getElementById("output").innerHTML = createExpression(value, width, height);
   })
   document.getElementById("enable-spin").addEventListener("click", (e) => {
-        if (e.target.className.includes("on")) {
-          e.target.className = "checkbox off"
-          spin = false;
-        } else {
-          e.target.className = "checkbox ticked"
-          spin = true;
-        }
-      })
+    if (e.target.className.includes("on")) {
+      e.target.className = "checkbox off"
+      spin = false;
+    } else {
+      e.target.className = "checkbox ticked"
+      spin = true;
+    }
+  })
+  document.getElementById("copy").addEventListener("click", (e) => {
+    window.copyToClipboard(document.getElementById("output").innerText);
+  })
 }
 
 setup()
