@@ -41,27 +41,17 @@ function createExpression(index, wide, tall) {
   let outputx = "";
   let outputy = "";
   let outputv = "";
-  //keep track of used indexes
-  let indexWorkaround = [];
   //keep track of how many parentheses we should actually have at the end
   //this doesn't really matter, it just prevents it from looking stupid
   let activeCount = 0;
 
   for(let i=0; i<index.length; i++) {
     if(index[i] == 1) {
-      workingIndex = i%400
-      if(indexWorkaround.includes(i%400)) {
-        let loopcount = 0
-        while(indexWorkaround.includes(workingIndex%400)) {
-          if(loopcount == 400) {
-            return "Error: Reached maximum loop count. Please reduce your pixel usage. (Max activated pixels: 400)"
-          }
-          workingIndex++
-          loopcount++
-        }
+      if (activeCount > 398) {
+        return "Error: Your image must contain less than 400 active lasers. Please reduce the laser count."
       }
-      outputx = outputx + "if(index == "+workingIndex.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
-      outputy = outputy + "if(index == "+workingIndex.toString()+","+((Math.floor(i/wide)+0.5)-(parseInt(wide)/2)).toString()+","
+      outputx = outputx + "if(index == "+activeCount.toString()+","+(((i%wide)+0.5)-(parseInt(tall)/2)).toString()+","
+      outputy = outputy + "if(index == "+activeCount.toString()+","+((Math.floor(i/wide)+0.5)-(parseInt(wide)/2)).toString()+","
       outputv = outputv + "index == "+workingIndex.toString()+" || "
       indexWorkaround.push(workingIndex)
       activeCount++
